@@ -295,7 +295,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1263906962}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.53071856
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -451,6 +451,8 @@ MonoBehaviour:
   difficultyDropdown: {fileID: 690616956}
   terrainDropdown: {fileID: 683872438}
   createRoomButton: {fileID: 1400239936}
+  exitButton: {fileID: 1257414535}
+  roomIdDisplayText: {fileID: 380325034}
   roomId: 
 --- !u!4 &110277652
 Transform:
@@ -1055,6 +1057,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353934451}
   m_CullTransparentMesh: 1
+--- !u!1 &380325033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 380325036}
+  - component: {fileID: 380325035}
+  - component: {fileID: 380325034}
+  m_Layer: 5
+  m_Name: GameID
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &380325034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380325033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 76
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 219
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Game Level
+
+'
+--- !u!222 &380325035
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380325033}
+  m_CullTransparentMesh: 1
+--- !u!224 &380325036
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380325033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2106236727}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 7.0377, y: -461.68}
+  m_SizeDelta: {x: 417.2526, y: 116.9586}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &443808283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,8 +1502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ae7984591c6164083af4ad46591206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomPrefab: {fileID: 1157180265327291424, guid: 6020a61aeb087704fbbeede8494c06c7,
-    type: 3}
 --- !u!1 &683872437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,9 +2176,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CreateAndJoinRooms, Assembly-CSharp
-        m_MethodName: CreateRoom
+      - m_Target: {fileID: 110277651}
+        m_TargetAssemblyTypeName: RoomOptionsManager, Assembly-CSharp
+        m_MethodName: OnExitToLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3966,6 +4047,7 @@ RectTransform:
   - {fileID: 1257414534}
   - {fileID: 580034704}
   - {fileID: 1947391436}
+  - {fileID: 380325036}
   - {fileID: 109922485}
   - {fileID: 683872441}
   - {fileID: 690616953}

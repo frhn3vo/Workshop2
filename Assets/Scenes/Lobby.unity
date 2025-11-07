@@ -1327,7 +1327,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 637002171}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: OnLeftRoom
+        m_MethodName: OnBackToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public void OnCreateRoom()
     {
@@ -16,8 +16,15 @@ public class LobbyManager : MonoBehaviour
         SceneManager.LoadScene("JoinRoom");
     }
 
-    public void OnLeftRoom()
+    public void OnBackToMainMenu()
     {
+        // Disconnect from Photon when returning to main menu
+        PhotonNetwork.Disconnect();
+    }
+
+    public override void OnDisconnected(Photon.Realtime.DisconnectCause cause)
+    {
+        // Only load main menu after successfully disconnected
         SceneManager.LoadScene("MainMenu");
     }
 }
