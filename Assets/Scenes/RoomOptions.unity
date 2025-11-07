@@ -295,7 +295,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1263906962}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.53071856
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -757,7 +757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: Grass
 --- !u!222 &245209310
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1570,11 +1570,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: Grass
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Sand
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Black Soil
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1768,11 +1768,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: Easy
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Normal
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Hard
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2459,7 +2459,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 205782975}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.53071856
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3514,7 +3514,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: Easy
 --- !u!222 &1652958142
 CanvasRenderer:
   m_ObjectHideFlags: 0

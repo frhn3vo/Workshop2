@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -249,6 +248,22 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    // ADDED: Exit game method for the button
+    public void ExitGame()
+    {
+        Debug.Log("Exit button pressed");
+
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+        {
+            // If not in a room, just go to lobby
+            SceneManager.LoadScene("Lobby");
+        }
+    }
+
     // Photon callbacks
     public override void OnJoinedRoom()
     {
@@ -335,6 +350,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleScoreboard();
+        }
+
+        // Debug: Test exit with Escape key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
         }
     }
 }
