@@ -11,7 +11,6 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
     public Text roomInfoText;
     public Text playerListText;
     public Button startGameButton;
-    public Text roomIdDisplayText; // Add this to display room ID prominently
 
     [Header("Team Selection UI")]
     public Button teamAButton;
@@ -28,8 +27,7 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
     private Dictionary<Player, string> playerTeams = new Dictionary<Player, string>();
     private string localPlayerTeam = "";
     private PhotonView photonViewComponent;
-    private bool isChangingScene = false;
-    private string currentRoomId = "";
+    private bool isChangingScene = false; // Track if we're changing scenes
 
     void Start()
     {
@@ -48,38 +46,10 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
         UpdateRoomInfo();
         UpdatePlayerList();
 
-        // Get and display the room ID
-        GetRoomID();
-
         // If we're joining an existing room, request current team data
         if (!PhotonNetwork.IsMasterClient)
         {
             photonViewComponent.RPC("RequestTeamData", RpcTarget.MasterClient);
-        }
-    }
-
-    private void GetRoomID()
-    {
-        if (PhotonNetwork.CurrentRoom != null)
-        {
-            // Try to get RoomID from custom properties first
-            if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("RoomID"))
-            {
-                currentRoomId = PhotonNetwork.CurrentRoom.CustomProperties["RoomID"] as string;
-            }
-            else
-            {
-                // Fallback to room name (which is the room ID)
-                currentRoomId = PhotonNetwork.CurrentRoom.Name;
-            }
-
-            Debug.Log("Current Room ID: " + currentRoomId);
-
-            // Display room ID prominently
-            if (roomIdDisplayText != null)
-            {
-                roomIdDisplayText.text = $"Room ID: {currentRoomId}";
-            }
         }
     }
 
@@ -145,6 +115,7 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
         CheckGameStartConditions();
     }
 
+    // New RPC method to request team data from master client
     [PunRPC]
     private void RequestTeamData()
     {
@@ -206,7 +177,11 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
             string terrain = PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Terrain") ?
                 PhotonNetwork.CurrentRoom.CustomProperties["Terrain"] as string : "Not Set";
 
-            roomInfoText.text = $"Difficulty: {difficulty}\n" +
+            // Get Room ID directly from room name (this is what we used when creating the room)
+            string roomId = PhotonNetwork.CurrentRoom.Name;
+
+            roomInfoText.text = $"Room ID: {roomId}\n" +
+                              $"Difficulty: {difficulty}\n" +
                               $"Terrain: {terrain}\n" +
                               $"Players: {PhotonNetwork.CurrentRoom.PlayerCount}/{PhotonNetwork.CurrentRoom.MaxPlayers}";
         }
@@ -238,6 +213,7 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
 
         playerListText.text = playerList;
 
+        // Debug log to see what's happening
         Debug.Log($"Updated player list. Total players: {PhotonNetwork.PlayerList.Length}, Teams recorded: {playerTeams.Count}");
     }
 
@@ -271,9 +247,10 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.SetCustomProperties(teamProperties);
 
         Debug.Log("Host is starting the game for all players...");
-        isChangingScene = true;
+        isChangingScene = true; // Set flag to indicate we're changing scenes
 
         // Use PhotonNetwork.LoadLevel to load the scene for all players in the room
+        // This will automatically load the same scene for all clients
         PhotonNetwork.LoadLevel("GameScene1");
     }
 
@@ -323,15 +300,6 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
 
         if (startGameButton != null)
             startGameButton.interactable = PhotonNetwork.IsMasterClient;
-    }
-
-    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
-    {
-        // Update room ID if it changes
-        if (propertiesThatChanged.ContainsKey("RoomID"))
-        {
-            GetRoomID();
-        }
     }
 
     public void LeaveRoom()

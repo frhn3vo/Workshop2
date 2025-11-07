@@ -20,10 +20,4 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene("Lobby");
     }
-
-    public override void OnDisconnected(Photon.Realtime.DisconnectCause cause)
-    {
-        Debug.Log($"Disconnected from Photon: {cause}");
-        // Optionally handle unexpected disconnections here
-    }
 }
