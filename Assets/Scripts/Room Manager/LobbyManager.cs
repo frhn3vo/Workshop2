@@ -15,4 +15,9 @@ public class LobbyManager : MonoBehaviour
         // Go to JoinRoom scene to enter room ID
         SceneManager.LoadScene("JoinRoom");
     }
+
+    public void OnLeftRoom()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
