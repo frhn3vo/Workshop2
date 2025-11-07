@@ -248,18 +248,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // ADDED: Exit game method for the button
     public void ExitGame()
     {
-        Debug.Log("Exit button pressed");
+        Debug.Log("Exit button pressed - GameManager is: " + gameObject.name);
+        Debug.Log("Photon in room: " + PhotonNetwork.InRoom);
+        Debug.Log("Current scene: " + SceneManager.GetActiveScene().name);
 
         if (PhotonNetwork.InRoom)
         {
+            Debug.Log("Leaving Photon room...");
             PhotonNetwork.LeaveRoom();
         }
         else
         {
-            // If not in a room, just go to lobby
+            Debug.Log("Loading lobby directly...");
             SceneManager.LoadScene("Lobby");
         }
     }
